@@ -17,11 +17,6 @@
  * http://stackoverflow.com/questions/621835/how-to-extract-part-of-this-image-in-java
  */
 
-import java.awt.image.BufferedImage; 	// need for buffered image
-import javax.imageio.ImageIO;			// needed for ImageIO.read, to find the file
-import java.io.File;					// needed for File, to open the file
-import javax.swing.*;					// needed for JLabel
-import java.awt.BorderLayout;			// needed for BorderLayout, but only for main debugging
 
 public class Card {
 	
@@ -31,17 +26,11 @@ public class Card {
 	public static final int SPADE = 1;		// spades
 	public static final int HEART = 2;		// hearts
 	public static final int DIAMOND = 3;	// diamonds
-	public static final String IMAGEFILENAME = "classic-playing-cards.png";	// image file
-	public static final int CARDWIDTH = 73;	// card width
-	public static final int CARDHEIGHT = 98; 	// card height
 	
-	//// class member ////
-	private static BufferedImage img = null;
 
 	//// data members ////
 	private int suit;			// the suit  
 	private int value;			// the card value, 0=ace, 1=deuce, 2=3 ... 10=9, Jack=10, Queen=11, King=12
-	private JLabel image;		// the card image file
 	private Card next;			// a link to the next node
 	
 	//// Constructors ////
@@ -49,32 +38,10 @@ public class Card {
 		// initialize to be a dummy node by default
 		suit = DUMMY;
 		value = DUMMY;
-		image = null;
 		next = null;
+	}
 		
-		// check to see if the buffered image is loaded
-		if (img == null) {
-			// not yet loaded, so load it now!
-			loadBufferedImage();
-		}
-	}
-	
-	//// Set up the buffered image
-	public void loadBufferedImage() {
-		try {
-			// get the path to the image file name
-		    java.net.URL imgURL = getClass().getResource(IMAGEFILENAME);
-		    if (imgURL != null) {
-		    	// read the image file, using the path
-		    	img = ImageIO.read(new File(imgURL.getFile()));
-		    } else {
-		        System.out.println("Couldn't find file: " + IMAGEFILENAME);
-		    }
-		} catch (Exception e) {
-			System.out.println("Error opening file.");
-		    image = new JLabel("Error");
-		}
-	}
+
 
 	/**
 	 * @return the suit
@@ -88,21 +55,6 @@ public class Card {
 	 */
 	public int getCard() {
 		return value;
-	}
-
-	/**
-	 * @return the card's image
-	 */
-	public JLabel getImage() {
-	    // as long as it's not a dummy card
-	    if (value != DUMMY && suit != DUMMY) {
-	    	// create a JLabel for display, for just the card that we want
-	    	image = new JLabel(new ImageIcon(img.getSubimage(CARDWIDTH*value,CARDHEIGHT*suit,CARDWIDTH,CARDHEIGHT)));
-	    } else {
-	    	// oops, error!  just display the text "DUMMY"
-	    	image = new JLabel("DUMMY");
-	    }
-		return image;
 	}
 	
 	/**
@@ -163,11 +115,6 @@ public class Card {
 		firstnode.setCard(2);
 		System.out.println("The first node is: " + firstnode);
 		
-		// this is a super-basic JFrame, used only for really basic testing
-		JFrame frame = new JFrame("Card");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(firstnode.getImage(), BorderLayout.CENTER);
-		frame.pack();
-		frame.setVisible(true);		
+		
 	}
 }
