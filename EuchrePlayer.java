@@ -4,317 +4,118 @@
 
 public class EuchrePlayer {
 
-	/**
-	 * @param args
-	 */
-	Card[] playerHand = new Card[4];	// an array to store the cards in the player's hand
+	LinkedListQueue playerHand = new LinkedListQueue();	// a queue to store the cards in the player's hand
 	
-	// the cards in the player's hand
-	Card card1;
-	Card card2;
-	Card card3;
-	Card card4;
-	Card card5;
+	private int num_Clubs;
+	private int num_Spades;
+	private int num_Hearts;
+	private int num_Diamonds;
 	
-	// pointers to various cards in the player's hand, for decision making reasons
-	Card lowestClub = null;
-	Card highestClub = null;
-	
-	Card lowestSpade = null;
-	Card highestSpade = null;
-	
-	Card lowestHeart = null;
-	Card highestHeart = null;
-	
-	Card lowestDiamond = null;
-	Card highestDiamond = null;
 	
 	public EuchrePlayer() {
 		
-		Card[] playerHand = {card1, card2, card3, card4, card5};
+		playerHand = new LinkedListQueue();
+		
+		num_Clubs = 0;
+		num_Spades = 0;
+		num_Hearts = 0;
+		num_Diamonds = 0;
 	}
 	
 	
-	
-	
-	/**
-	 * @return the playerHand
-	 */
-	public Card[] getPlayerHand() {
-		return playerHand;
-	}
-
-
-
-
-	/**
-	 * @return the lowestClub
-	 */
-	public Card getLowestClub() {
-		return lowestClub;
-	}
-
-
-
-
-	/**
-	 * @return the highestClub
-	 */
-	public Card getHighestClub() {
-		return highestClub;
-	}
-
-
-
-
-	/**
-	 * @return the lowestSpade
-	 */
-	public Card getLowestSpade() {
-		return lowestSpade;
-	}
-
-
-
-
-	/**
-	 * @return the highestSpade
-	 */
-	public Card getHighestSpade() {
-		return highestSpade;
-	}
-
-
-
-
-	/**
-	 * @return the lowestHeart
-	 */
-	public Card getLowestHeart() {
-		return lowestHeart;
-	}
-
-
-
-
-	/**
-	 * @return the highestHeart
-	 */
-	public Card getHighestHeart() {
-		return highestHeart;
-	}
-
-
-
-
-	/**
-	 * @return the lowestDiamond
-	 */
-	public Card getLowestDiamond() {
-		return lowestDiamond;
-	}
-
-
-
-
-	/**
-	 * @return the highestDiamond
-	 */
-	public Card getHighestDiamond() {
-		return highestDiamond;
-	}
-
-
-
-
-	/**
-	 * @param playerHand the playerHand to set
-	 */
-	public void setPlayerHand(Card[] playerHand) {
-		this.playerHand = playerHand;
-	}
-
-
-
-
-	/**
-	 * @param lowestClub the lowestClub to set
-	 */
-	public void setLowestClub(Card lowestClub) {
-		this.lowestClub = lowestClub;
-	}
-
-
-
-
-	/**
-	 * @param highestClub the highestClub to set
-	 */
-	public void setHighestClub(Card highestClub) {
-		this.highestClub = highestClub;
-	}
-
-
-
-
-	/**
-	 * @param lowestSpade the lowestSpade to set
-	 */
-	public void setLowestSpade(Card lowestSpade) {
-		this.lowestSpade = lowestSpade;
-	}
-
-
-
-
-	/**
-	 * @param highestSpade the highestSpade to set
-	 */
-	public void setHighestSpade(Card highestSpade) {
-		this.highestSpade = highestSpade;
-	}
-
-
-
-
-	/**
-	 * @param lowestHeart the lowestHeart to set
-	 */
-	public void setLowestHeart(Card lowestHeart) {
-		this.lowestHeart = lowestHeart;
-	}
-
-
-
-
-	/**
-	 * @param highestHeart the highestHeart to set
-	 */
-	public void setHighestHeart(Card highestHeart) {
-		this.highestHeart = highestHeart;
-	}
-
-
-
-
-	/**
-	 * @param lowestDiamond the lowestDiamond to set
-	 */
-	public void setLowestDiamond(Card lowestDiamond) {
-		this.lowestDiamond = lowestDiamond;
-	}
-
-
-
-
-	/**
-	 * @param highestDiamond the highestDiamond to set
-	 */
-	public void setHighestDiamond(Card highestDiamond) {
-		this.highestDiamond = highestDiamond;
-	}
-	
-	public void sortHand(Card[] playerHand) {
+	public void countCards(){
 		
 		int i;
-		for (i=0; i<4; i++) {
-			Card placeholder = playerHand[i];
-			if(placeholder.getSuit() == Card.CLUB) {
-				if (highestClub == null) {
-					setHighestClub(playerHand[i]);
+		Card temp;
+		for (i=0; i<5; i++){
+			temp = playerHand.dequeue();
+			if (temp.getSuit() == Card.CLUB) {
+				if (temp.getCard() ==2 ){
+					num_Clubs++;
+					num_Spades++;
 				}
-				else if (placeholder.getCard() > highestClub.getCard()) {
-					setHighestClub(playerHand[i]);
-				}
-				else {
-					
-				}
-				
-				if (lowestClub == null) {
-					setLowestClub(playerHand[i]);
-				}
-				else if (placeholder.getCard() < lowestClub.getCard()) {
-					setLowestClub(playerHand[i]);
-				}
-				else {
-					
+				else{
+					num_Clubs++;
 				}
 			}
-			
-			
-			else if(placeholder.getSuit() == Card.SPADE) {
-				if (highestSpade == null) {
-					setHighestSpade(playerHand[i]);
+			else if (temp.getSuit() == Card.SPADE){
+				if (temp.getCard() ==2 ){
+					num_Clubs++;
+					num_Spades++;
 				}
-				else if (placeholder.getCard() > highestSpade.getCard()) {
-					setHighestSpade(playerHand[i]);
-				}
-				else {
-					
-				}
-				
-				if (lowestSpade == null) {
-					setLowestSpade(playerHand[i]);
-				}
-				else if (placeholder.getCard() < lowestSpade.getCard()) {
-					setLowestSpade(playerHand[i]);
-				}
-				else {
-					
+				else{
+					num_Spades++;
 				}
 			}
-			
-			else if(placeholder.getSuit() == Card.HEART) {
-				if (highestHeart == null) {
-					setHighestHeart(playerHand[i]);
+			else if (temp.getSuit() == Card.HEART) {
+				if (temp.getCard() ==2 ){
+					num_Hearts++;
+					num_Diamonds++;
 				}
-				else if (placeholder.getCard() > highestHeart.getCard()) {
-					setHighestHeart(playerHand[i]);
-				}
-				else {
-					
-				}
-				
-				if (lowestHeart == null) {
-					setLowestHeart(playerHand[i]);
-				}
-				else if (placeholder.getCard() < lowestHeart.getCard()) {
-					setLowestHeart(playerHand[i]);
-				}
-				else {
-					
+				else{
+					num_Hearts++;
 				}
 			}
-			
-			else if(placeholder.getSuit() == Card.DIAMOND) {
-				if (highestDiamond == null) {
-					setHighestDiamond(playerHand[i]);
+			else if (temp.getSuit() == Card.DIAMOND || temp.getSuit() == Card.HEART && temp.getCard() == 2){
+				if (temp.getCard() ==2 ){
+					num_Hearts++;
+					num_Diamonds++;
 				}
-				else if (placeholder.getCard() > highestDiamond.getCard()) {
-					setHighestDiamond(playerHand[i]);
+				else{
+					num_Diamonds++;
 				}
-				else {
-					
-				}
-				
-				if (lowestDiamond == null) {
-					setLowestDiamond(playerHand[i]);
-				}
-				else if (placeholder.getCard() < lowestDiamond.getCard()) {
-					setLowestDiamond(playerHand[i]);
-				}
-				else {
-					
-				}
+			}
+			playerHand.enqueue(temp.getCard(), temp.getSuit());
+		}
+		
+		//System.out.println("I have " + num_Clubs + " Clubs, " + num_Spades + " Spades, "
+		//+ num_Hearts + " Hearts, and " + num_Diamonds + "Diamonds.");
+	}
+	
+	public Card callTrump(Card faceCard) {
+		if (faceCard.getSuit() == Card.CLUB){
+			if (num_Clubs > 2) {
+				return faceCard;
+			}
+			else {
+				return null;
 			}
 		}
+		else if (faceCard.getSuit() == Card.SPADE) {
+			if (num_Spades > 2) {
+				return faceCard;
+			}
+			else {
+				return null;
+			}
+		}
+		else if (faceCard.getSuit() == Card.HEART) {
+			if (num_Hearts > 2) {
+				return faceCard;
+			}
+			else {
+				return null;
+			}
+		}
+		else if (faceCard.getSuit() == Card.DIAMOND) {
+			if (num_Diamonds > 2) {
+				return faceCard;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
 	}
-
+	
+	
 
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
