@@ -68,8 +68,8 @@ public class EuchrePlayer {
 			playerHand.enqueue(temp.getCard(), temp.getSuit());
 		}
 		
-		//System.out.println("I have " + num_Clubs + " Clubs, " + num_Spades + " Spades, "
-		//+ num_Hearts + " Hearts, and " + num_Diamonds + "Diamonds.");
+		System.out.println("I have " + num_Clubs + " Clubs, " + num_Spades + " Spades, "
+		+ num_Hearts + " Hearts, and " + num_Diamonds + "Diamonds.");
 	}
 	
 	public Card callTrump(Card faceCard) {
@@ -110,6 +110,168 @@ public class EuchrePlayer {
 		}
 	}
 	
+	public Card openCall(Card turnedDown) {
+		
+		Card temp = new Card();
+		if (turnedDown.getSuit() == Card.CLUB){
+			if (num_Spades > 2) {
+				temp.setSuit(Card.SPADE);
+				return temp;
+			}
+			else if (num_Hearts > 2) {
+				temp.setSuit(Card.HEART);
+				return temp;
+			}
+			else if (num_Diamonds > 2) {
+				temp.setSuit(Card.DIAMOND);
+				return temp;
+			}
+			else {
+				return null;
+			}
+		}
+		
+		else if (turnedDown.getSuit() == Card.SPADE){
+			if (num_Clubs > 2) {
+				temp.setSuit(Card.CLUB);
+				return temp;
+			}
+			else if (num_Hearts > 2) {
+				temp.setSuit(Card.HEART);
+				return temp;
+			}
+			else if (num_Diamonds > 2) {
+				temp.setSuit(Card.DIAMOND);
+				return temp;
+			}
+			else {
+				return null;
+			}
+		}
+		
+		else if (turnedDown.getSuit() == Card.HEART){
+			if (num_Clubs > 2) {
+				temp.setSuit(Card.CLUB);
+				return temp;
+			}
+			else if (num_Spades > 2) {
+				temp.setSuit(Card.SPADE);
+				return temp;
+			}
+			else if (num_Diamonds > 2) {
+				temp.setSuit(Card.DIAMOND);
+				return temp;
+			}
+			else {
+				return null;
+			}
+		}
+		else if (turnedDown.getSuit() == Card.DIAMOND){
+			if (num_Clubs > 2) {
+				temp.setSuit(Card.CLUB);
+				return temp;
+			}
+			else if (num_Hearts > 2) {
+				temp.setSuit(Card.HEART);
+				return temp;
+			}
+			else if (num_Spades > 2) {
+				temp.setSuit(Card.SPADE);
+				return temp;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public Card screwTheDealer(Card turnedDown) {
+		System.out.println("Well screw me!");
+		Card temp = new Card();
+		if (turnedDown.getSuit() == Card.CLUB){
+			if (num_Spades >= 1) {
+				temp.setSuit(Card.SPADE);
+				System.out.println("Fck it, going Spades!");
+				return temp;
+			}
+			else if (num_Hearts >= 1) {
+				temp.setSuit(Card.HEART);
+				System.out.println("Fck it, going Hearts!");
+				return temp;
+			}
+			else if (num_Diamonds >= 1) {
+				temp.setSuit(Card.DIAMOND);
+				System.out.println("Fck it, going Diamonds!");
+				return temp;
+			}
+			
+		}
+		
+		else if (turnedDown.getSuit() == Card.SPADE){
+			if (num_Clubs >= 1) {
+				temp.setSuit(Card.CLUB);
+				System.out.println("Fck it, going Clubs!");
+				return temp;
+			}
+			else if (num_Hearts >= 1) {
+				temp.setSuit(Card.HEART);
+				System.out.println("Fck it, going Hearts!");
+				return temp;
+			}
+			else if (num_Diamonds >= 1) {
+				temp.setSuit(Card.DIAMOND);
+				System.out.println("Fck it, going Diamonds!");
+				return temp;
+			}
+			
+		}
+		
+		else if (turnedDown.getSuit() == Card.HEART){
+			if (num_Clubs >= 1) {
+				temp.setSuit(Card.CLUB);
+				System.out.println("Fck it, going Clubs!");
+				return temp;
+			}
+			else if (num_Spades >= 1) {
+				temp.setSuit(Card.SPADE);
+				System.out.println("Fck it, going Spades!");
+				return temp;
+			}
+			else if (num_Diamonds >= 1) {
+				temp.setSuit(Card.DIAMOND);
+				System.out.println("Fck it, going Diamonds!");
+				return temp;
+			}
+			
+		}
+		else if (turnedDown.getSuit() == Card.DIAMOND){
+			if (num_Clubs >= 1) {
+				temp.setSuit(Card.CLUB);
+				System.out.println("Fck it, going Clubs!");
+				return temp;
+			}
+			else if (num_Hearts >= 1) {
+				temp.setSuit(Card.HEART);
+				System.out.println("Fck it, going Hearts!");
+				return temp;
+			}
+			else if (num_Spades >= 1) {
+				temp.setSuit(Card.SPADE);
+				System.out.println("Fck it, going Spades!");
+				return temp;
+			}
+				
+		}
+		else {
+			System.out.println("This dumbass doesn't know what to do");
+			temp.setSuit(Card.SPADE);
+			return temp;
+		}
+		return temp;
+	}
 	
 
 
